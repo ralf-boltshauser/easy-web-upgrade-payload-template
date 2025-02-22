@@ -190,7 +190,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | HTMLBlock | MarkdownBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -727,6 +727,32 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HTMLBlock".
+ */
+export interface HTMLBlock {
+  /**
+   * Enter raw HTML content. This will be sanitized before rendering.
+   */
+  htmlContent: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'htmlBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MarkdownBlock".
+ */
+export interface MarkdownBlock {
+  /**
+   * Enter Markdown content. This will be rendered as formatted text.
+   */
+  markdownContent: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'markdownBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1015,6 +1041,8 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        htmlBlock?: T | HTMLBlockSelect<T>;
+        markdownBlock?: T | MarkdownBlockSelect<T>;
       };
   meta?:
     | T
@@ -1111,6 +1139,24 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HTMLBlock_select".
+ */
+export interface HTMLBlockSelect<T extends boolean = true> {
+  htmlContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MarkdownBlock_select".
+ */
+export interface MarkdownBlockSelect<T extends boolean = true> {
+  markdownContent?: T;
   id?: T;
   blockName?: T;
 }
