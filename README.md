@@ -3,6 +3,9 @@
 ## Todos
 
 - [ ] ensure to set create to authenticated
+- [ ] use S3-like storage for media
+- [ ] allow to change footer and footer logo
+- [ ] change navbar to hamburger menu on mobile
 
 # Template Readme
 
